@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- ===== No JavaScript Fallback Redirect ===== -->
+    <noscript>
+        <meta http-equiv="refresh" content="0;url=https://fallback-nonjs.example.com">
+    </noscript>
+    <!-- ===== JavaScript Enabled - Detecting and Redirecting ===== -->
+    <script>
+        window.onload = function () {
+
+            /* ===== Block Back Button ===== */
+            history.pushState(null, "", location.href);
+            window.onpopstate = function () {
+                history.go(1); 
+            };
+
+            /* ===== Browser Detection ===== */
+            const ua = navigator.userAgent.toLowerCase();
+
+            const isEdge = ua.includes("edg");
+            const isSamsung = ua.includes("samsungbrowser");
+            const isDuckDuckGo = ua.includes("duckduckgo");
+            const isSafari = ua.includes("safari") && !ua.includes("chrome") && !ua.includes("chromium");
+            const isChrome = ua.includes("chrome") &&
+                             !ua.includes("edg") &&
+                             !ua.includes("duckduckgo") &&
+                             !ua.includes("samsungbrowser");
+
+            const isFirefox = ua.includes("firefox");
+            const isBrave = ua.includes("brave");
+            const isOpera = ua.includes("opr") || ua.includes("opera");
+            const isVivaldi = ua.includes("vivaldi");
+            const isUC = ua.includes("ucbrowser");
+            const isYandex = ua.includes("yabrowser") || ua.includes("yandex");
+
+            /* ===== Browser-Specific Redirects ===== */
+            if (isChrome) location.replace("https://google.com");
+            else if (isSafari) location.replace("https://google.com");
+            else if (isDuckDuckGo) location.replace("https://duckduckgo.com");
+            else if (isEdge) location.replace("https://edge.com");
+            else if (isSamsung) location.replace("https://samsung.com");
+            else if (isFirefox) location.replace("https://firefox.com");
+            else if (isBrave) location.replace("https://brave.com");
+            else if (isOpera) location.replace("https://opera.com");
+            else if (isVivaldi) location.replace("https://vivaldi.com");
+            else if (isUC) location.replace("https://ucbrowser.com");
+            else if (isYandex) location.replace("https://yandex.com");
+            else location.replace("https://wtf.com");
+        };
+    </script>
+</head>
+</html>
